@@ -80,8 +80,6 @@ export class MainComponent implements OnInit {
     );
   }
 
-
-
   toggleFunction() {
     if (this.isShinyMode) {
       this.getPokemons();
