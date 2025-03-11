@@ -26,7 +26,7 @@ getList(offset = 0, limit = 20): Observable<any[]> {
   );
 }
 
-// Método para obtener las imágenes de los Pokémon de un array
+// Método para obtener los Pokémon de un array
  // Crear un array de peticiones HTTP GET para cada Pokémon en el array
 getPokemonsAtributos(pokemons: any[]): Observable<Pokemon[]> {
   const requests = pokemons.map(pokemon =>

@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
   pokemons: Pokemon[] = [];
   currentPage = 0; // Página actual
   saltoPagina= 20; // salta 20 pokemosn
+  private isShinyMode: boolean = false;
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -19,7 +20,7 @@ export class MainComponent implements OnInit {
     this.getPokemons();
   }
 
-  getPokemons(page = 0): void {
+  getPokemons(page = this.currentPage): void {
     const offset = page * this.saltoPagina; // Calcula el desplazamiento basado en la página actual es decir cuantos pokemons se salta
     this.pokemonService.getList(offset).subscribe(
       (data: any[]) => {
@@ -78,4 +79,22 @@ export class MainComponent implements OnInit {
       }
     );
   }
+
+
+
+  toggleFunction() {
+    if (this.isShinyMode) {
+      this.getPokemons();
+    } else {
+      this.getPokemonsShiny();
+    }
+    this.isShinyMode = !this.isShinyMode;
+  }
 }
+
+
+
+
+
+
+
