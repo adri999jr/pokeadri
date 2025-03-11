@@ -18,9 +18,6 @@ getList(offset = 0, limit = 20): Observable<any[]> {
   // Construcción de la URL con los parámetros offset y limit para la paginación
   const url = `${this.baseUrl}?offset=${offset}&limit=${limit}`;
 
-  // Imprimir la URL de la petición en la consola
-  console.log('Petición => ' + url);
-
   // Realizar la petición HTTP GET a la URL generada
   return this.http.get<any>(url).pipe(
       // Transformar la respuesta para extraer solo los resultados
@@ -53,4 +50,21 @@ getPokemonsAtributos(pokemons: any[]): Observable<Pokemon[]> {
     console.error('An error occurred:', error);
     return throwError('Something went wrong; please try again later.');
   }
+
+  getShiny(pokemons: any[]): Observable<Pokemon[]> {
+    const requests = pokemons.map(pokemon =>
+        this.http.get<any>(pokemon.url).pipe(
+            // Transformar la respuesta para extraer id, name e image shiny de cada Pokémon
+            map(pokemonData => ({
+                id: pokemonData.id,
+                name: pokemonData.name,
+                image: pokemonData.sprites.front_shiny
+            })),
+            // Manejar cualquier error que ocurra durante la petición
+            catchError(this.handleError)
+        )
+    );
+    // Ejecutar todas las peticiones y combinar los resultados
+    return forkJoin(requests);
+}
 }

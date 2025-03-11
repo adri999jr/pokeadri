@@ -11,7 +11,8 @@ import { Pokemon } from '../../Models/Pokemon';
 export class MainComponent implements OnInit {
   pokemons: Pokemon[] = [];
   currentPage = 0; // Página actual
-  saltoPagina= 20;
+  saltoPagina= 20; // salta 20 pokemosn
+
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
@@ -41,6 +42,9 @@ export class MainComponent implements OnInit {
   // Método para avanzar a la siguiente página
   nextPage(): void {
     this.currentPage++;
+    /*if(this.shiny){
+      this.getPokemonsShiny(this.currentPage);
+    }*/
     this.getPokemons(this.currentPage);
   }
 
@@ -48,7 +52,30 @@ export class MainComponent implements OnInit {
   prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
+     /* if(this.shiny){
+        this.getPokemonsShiny(this.currentPage);
+      }*/
       this.getPokemons(this.currentPage);
     }
+  }
+
+  getPokemonsShiny(page= this.currentPage): void {
+    const offset = page * this.saltoPagina; // Calcula el desplazamiento basado en la página actual es decir cuantos pokemons se salta
+    this.pokemonService.getList(offset).subscribe(
+      (data: any[]) => {
+        this.pokemonService.getShiny(data).subscribe(
+          (pokemons: Pokemon[]) => {
+            this.pokemons = pokemons;
+            this.pokemons.sort((a, b) => a.id - b.id); // Ordena por ID
+          },
+          error => {
+            console.error('There was an error!', error);
+          }
+        );
+      },
+      error => {
+        console.error('There was an error!', error);
+      }
+    );
   }
 }

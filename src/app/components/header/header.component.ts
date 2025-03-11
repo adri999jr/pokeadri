@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MainComponent } from '../main/main.component';
 
 @Component({
   selector: 'app-header',
@@ -8,3 +9,5 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   title = 'PokeAdri';
 }
+
+
