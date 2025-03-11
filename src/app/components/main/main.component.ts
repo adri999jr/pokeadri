@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
     const offset = page * this.saltoPagina; // Calcula el desplazamiento basado en la página actual es decir cuantos pokemons se salta
     this.pokemonService.getList(offset).subscribe(
       (data: any[]) => {
-        this.pokemonService.getPokemonsImages(data).subscribe(
+        this.pokemonService.getPokemonsAtributos(data).subscribe(
           (pokemons: Pokemon[]) => {
             this.pokemons = pokemons;
             this.pokemons.sort((a, b) => a.id - b.id); // Ordena por ID
