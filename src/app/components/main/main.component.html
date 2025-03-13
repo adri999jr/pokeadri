@@ -1,13 +1,15 @@
 <div class="pokemon-grid">
   <div *ngFor="let pokemon of pokemons" class="pokemon-card">
-    <img [src]="pokemon.image" alt="{{ pokemon.name }}">
-    <h3>{{ pokemon.name }}</h3>
+    <!-- Hacemos las tarjetas clickeables usando routerLink -->
+    <a [routerLink]="['/details', pokemon.id]">
+      <img [src]="pokemon.image" alt="{{ pokemon.name }}">
+      <h3>{{ pokemon.name }}</h3>
+    </a>
   </div>
 </div>
+
 <div class="pagination">
   <button (click)="prevPage()" [disabled]="currentPage === 0">Anterior</button>
   <button (click)="nextPage()">Siguiente</button>
   <button (click)="toggleFunction()">Shiny Mode</button>
-
-
 </div>

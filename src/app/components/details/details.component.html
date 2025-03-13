@@ -1,0 +1,17 @@
+<div *ngIf="pokemonDetails">
+    <h1>{{ pokemonDetails.name | uppercase }}</h1>
+    <img [src]="pokemonDetails.image" alt="{{ pokemonDetails.name }}">
+    <div>
+      <h3>Estadísticas:</h3>
+      <ul>
+        <li *ngFor="let stat of pokemonDetails.stats">
+          {{ stat.name | uppercase }}: {{ stat.base }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Tipos:</h3>
+      <span *ngFor="let type of pokemonDetails.types">{{ type }}</span>
+    </div>
+  </div>
+  

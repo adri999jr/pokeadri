@@ -67,4 +67,21 @@ getPokemonsAtributos(pokemons: any[]): Observable<Pokemon[]> {
     // Ejecutar todas las peticiones y combinar los resultados
     return forkJoin(requests);
 }
+getPokemonDetails(id: number | string): Observable<Pokemon> {
+  const url = `${this.baseUrl}/${id}`;
+  return this.http.get<any>(url).pipe(
+    map(pokemonData => ({
+      id: pokemonData.id,
+      name: pokemonData.name,
+      image: pokemonData.sprites.front_default,
+      stats: pokemonData.stats.map((stat: any) => ({
+        name: stat.stat.name,
+        base: stat.base_stat
+      })),
+      types: pokemonData.types.map((type: any) => type.type.name)
+    })),
+    catchError(this.handleError)
+  );
+}
+
 }
