@@ -1,17 +1,27 @@
-<div *ngIf="pokemonDetails">
-    <h1>{{ pokemonDetails.name | uppercase }}</h1>
-    <img [src]="pokemonDetails.image" alt="{{ pokemonDetails.name }}">
-    <div>
-      <h3>Estadísticas:</h3>
-      <ul>
-        <li *ngFor="let stat of pokemonDetails.stats">
-          {{ stat.name | uppercase }}: {{ stat.base }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Tipos:</h3>
-      <span *ngFor="let type of pokemonDetails.types">{{ type }}</span>
+<div class="container">
+    <div *ngIf="pokemon" class="pokemon-card">
+      <div class="pokemon-thumbnail">
+        <img [src]="shiny" alt="{{ pokemon.name }}" loading="lazy">
+        <span>Nº {{ pokemon.id }} {{ pokemon.name }}</span>
+      </div>
+      <div class="pokemon-image-container">
+        <div class="pokemon-image">
+          <img [src]="img" alt="{{ pokemon.name }}">
+        </div>
+      </div>
+      <div class="details">
+        <p><strong>Tipo:</strong> <span *ngFor="let type of pokemon.types">{{ type.type.name }}</span></p>
+        <p><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</p>
+        <p><strong>Altura:</strong> {{ pokemon.height / 10 }} m</p>
+        <div class="abilities">
+          <p><strong>Habilidades:</strong> <span *ngFor="let ability of pokemon.abilities">{{ ability.ability.name }}</span></p>
+        </div>
+        <div class="stats">
+          <p><strong>Estadísticas:</strong></p>
+          <ul>
+            <li *ngFor="let stat of pokemon.stats">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-  

@@ -3,13 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, forkJoin, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Pokemon } from '../Models/Pokemon';
+import { PokemonDetails } from '../Models/PokemonDetails';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
-  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
   constructor(private http: HttpClient) {}
 
@@ -83,5 +84,9 @@ getPokemonDetails(id: number | string): Observable<Pokemon> {
     catchError(this.handleError)
   );
 }
-
+getPokemonById(id: number): Observable<PokemonDetails> {
+  // Método para obtener un Pokémon por ID
+  return this.http.get<PokemonDetails>(`${this.baseUrl}${id}`);
+  // Realiza una solicitud HTTP GET a la URL del API con el ID del Pokémon y retorna un Observable con el resultado
+}
 }
