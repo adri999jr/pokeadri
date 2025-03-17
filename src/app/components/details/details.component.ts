@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core'; 
-import { ActivatedRoute } from '@angular/router'; 
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../Services/pokemon.service';
 import { PokemonDetails } from '../../Models/PokemonDetails';
 
 
 @Component({
-  selector: 'app-details', 
+  selector: 'app-details',
   standalone: false,
-  templateUrl: './details.component.html', 
-  styleUrls: ['./details.component.css'] 
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
   pokemon: PokemonDetails | undefined; // Variable para almacenar la información del Pokémon
@@ -32,7 +32,7 @@ export class DetailsComponent implements OnInit {
           console.log('Pokemon data:', pokemon); // Imprime los datos del Pokémon en la consola (para debug)
           this.pokemon = pokemon; // Asigna los datos del Pokémon a la variable
           // Asigna las URL de la imagen y el shiny animado del Pokémon usando el ID
-          this.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+          this.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`;
           this.shiny = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${id}.gif`;
         });
       }
