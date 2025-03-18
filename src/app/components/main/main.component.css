@@ -56,3 +56,7 @@
 .pagination button:hover:not(:disabled) {
   background-color: #0056b3;
 }
+
+a{
+  text-decoration: none;
+}
