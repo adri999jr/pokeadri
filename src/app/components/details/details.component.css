@@ -50,7 +50,6 @@ body {
 .pokemon-images img {
   width: 100px;
   border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .info {
